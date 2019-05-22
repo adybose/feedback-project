@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title%}
+  Home
+{% endblock %}
+
+{% block content %}
+  <div>
+    <h1 class="center">Welcome to Feedfront</h1>
+    <p class="center">Powered by Django</p>
+    <br>
+    <br>
+    <p class="center">Please fill a short feedback for us</p>
+    <p class="center">
+      <a class="btn btn-primary btn-md" href="{% url 'feedback' %}" role="button">Begin</a>
+    </p>
+  </div>
+
+{% endblock %}
