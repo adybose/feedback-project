@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title%}
+  Register
+{% endblock %}
+
+{% block content %}
+  <div>
+    <h1 class="center">Register</h1>
+    <p class="center">Enter your name and email to start the survey</p>
+    <form class="horizontal-form" method="post">
+      {% csrf_token %}
+      {{ form|crispy }}
+      <p>
+        <input class="btn btn-success" type="submit" value='Submit'>
+      </p>
+    </form>
+  </div>
+
+{% endblock %}
