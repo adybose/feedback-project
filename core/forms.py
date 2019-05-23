@@ -1,7 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.forms import ModelForm
 from .models import User, Response
-
+from django import forms
 
 class UserRegistrationForm(ModelForm):
 
@@ -28,6 +28,7 @@ class FeedbackForm(ModelForm):
                   "answer",
                   "user",
         ]
+        answer = forms.ChoiceField(widget=forms.RadioSelect)
 
     def save(self, commit=True):
         response = super(ModelForm, self).save(commit=False)

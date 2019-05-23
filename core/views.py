@@ -10,7 +10,7 @@ from .forms import UserRegistrationForm, FeedbackForm#, QuizForm
 class RegistrationPageView(TemplateView):
     def get(self, request):
         form = UserRegistrationForm()
-        return render(request, template_name='quiz/register.html', context={'form': form})
+        return render(request, template_name='core/register.html', context={'form': form})
 
     def post(self, request):
         form = UserRegistrationForm(data=request.POST)
@@ -21,7 +21,7 @@ class RegistrationPageView(TemplateView):
 
         else:
             print("form is invalid")
-        return render(request, template_name='quiz/registration_submitted.html', context={'user': user})
+        return render(request, template_name='core/registration_submitted.html', context={'user': user})
 
 
 

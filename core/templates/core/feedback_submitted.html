@@ -6,7 +6,7 @@
 
 {% block content %}
   <div>
-    <h1 class="center">Congratulation User!</h1>
+    <h1 class="center">Congratulation {{ response.user }}!</h1>
     <p class="center">Your feedback has been submitted. Download the feedback as a JSON file.</p>
       <p class="center">
         <a class="btn btn-primary btn-md" href="{% url 'download' %}" role="button">Download</a>

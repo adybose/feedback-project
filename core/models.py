@@ -34,11 +34,11 @@ class User(models.Model):
 
 
 class Question(models.Model):
-    question = models.CharField(max_length = 250)
-    optiona = models.CharField(max_length = 100)
-    optionb = models.CharField(max_length = 100)
-    optionc = models.CharField(max_length = 100)
-    optiond = models.CharField(max_length = 100)
+    question = models.CharField(max_length=250)
+    optiona = models.CharField(max_length=100)
+    optionb = models.CharField(max_length=100)
+    optionc = models.CharField(max_length=100)
+    optiond = models.CharField(max_length=100)
 
     def __str__(self):
         return self.question
@@ -47,7 +47,7 @@ class Question(models.Model):
 class Response(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    answer = forms.ChoiceField(widget=forms.RadioSelect())
+    answer = models.CharField(max_length=100)
 
     def __str__(self):
         return self.answer
