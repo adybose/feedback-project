@@ -28,7 +28,7 @@ class FeedbackForm(ModelForm):
                   "answer",
                   "user",
         ]
-        answer = forms.ChoiceField(widget=forms.RadioSelect)
+        # answer = forms.ChoiceField(widget=forms.RadioSelect())
 
     def save(self, commit=True):
         response = super(ModelForm, self).save(commit=False)

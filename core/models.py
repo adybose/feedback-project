@@ -26,7 +26,6 @@ class User(models.Model):
                     )
                 ]
         )
-
     email = models.EmailField(blank=False)
 
     def __str__(self):
