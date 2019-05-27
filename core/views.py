@@ -119,48 +119,53 @@ class FeedbackView(TemplateView):
         #
         # else:
         #     print("form is invalid")
-        f = open("feedback_response.json", "w")
+        f = open("media/download/feedback_response.json", "w")
         f.write(response_json)
         f.close()
-        return render(request, template_name='core/feedback_submitted.html', context={'response': response})
+        return render(request, template_name='core/feedback_submitted.html', context={})
 
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-# class MyTransictions(View):
+# from django.http import HttpResponse
+# from django.conf import settings
+# import os
 #
-#     @login_required()
-#     def diposit_view(request):
-#         if not request.user.is_authenticated:
-#             raise Http404
-#         else:
-#             title = "Deposit"
-#             form = DepositForm(request.POST or None)
+# def download(request):
+#     file_path = os.path.join(settings.BASE_DIR, 'media\\download\\feedback_submitted.json')
+#     print(file_path)
+#     json_data = open(file_path, "r").read()
+#     return HttpResponse(json_data, content_type="application/json")
+
+
+from django.utils.encoding import smart_str
+from django.http import HttpResponse
+from django.conf import settings
+import os
+
+def download(request):
+    response = HttpResponse(content_type='application/force-download') # mimetype is replaced by content_type for django 1.7
+    response['Content-Disposition'] = 'attachment; filename=%s' % smart_str('feedback_submitted.json')
+
+    path = os.path.join(settings.MEDIA_ROOT, 'download/')
+    response['X-Sendfile'] = smart_str(path)
+    # It's usually a good idea to set the 'Content-Length' header too.
+    # You can also set any other required headers: Cache-Control, etc.
+    return response
+
+
+# import os
+# from django.conf import settings
+# from django.http import HttpResponse, Http404
 #
-#             if form.is_valid():
-#                 deposit = form.save(commit=False)
-#                 deposit.user = request.user
-#                 deposit.user.balance += deposit.amount
-#                 deposit.user.save()
-#                 deposit.save()
-#                 messages.success(request, 'You Have Deposited {} ₹.'
-#                              .format(deposit.amount))
-#                 return redirect("home")
 #
-#             context = {
-#                     "title": title,
-#                     "form": form
-#                   }
-#             return render(request, "transactions/form.html", context)
-#
+# def download(request, path='download/feedback_submitted.json'):
+#     file_path = os.path.join(settings.MEDIA_ROOT, path)
+#     if os.path.exists(file_path):
+#         with open(file_path, 'rb') as fh:
+#             response = HttpResponse(fh.read(), content_type="application/json")
+#             response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
+#             return response
+#     raise Http404
