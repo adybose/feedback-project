@@ -134,6 +134,6 @@ def download(request):
     file_path = os.path.join(settings.MEDIA_ROOT, 'download', 'feedback_response.json')
 
     data = open(file_path).read()
-    response = HttpResponse(data, content_type='application/json') # mimetype is replaced by content_type for django 1.7
+    response = HttpResponse(data, content_type='application/json')
     response['Content-Disposition'] = 'attachment; filename="%s"' % smart_str('feedback_response.json')
     return response
