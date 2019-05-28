@@ -16,3 +16,11 @@ _Note: Make sure virtualenv is in the path, else you will have to enter the full
 - Clone the repository locally and `cd` into the project root.
 - Run the application using `python manage.py runserver 8000`
 - Open your browser and enter `localhost:8000` in the address bar to access the application from the browser.
+
+## Screenshots
+
+![Home](https://raw.githubusercontent.com/adbose/django-feedback/assets/feedfront_home.PNG)
+![Register](https://raw.githubusercontent.com/adbose/django-feedback/assets/feedfront_register.PNG)
+![Start](https://raw.githubusercontent.com/adbose/django-feedback/assets/feedfront_start.PNG)
+![Form](https://raw.githubusercontent.com/adbose/django-feedback/assets/feedfront_form.PNG)
+![Download](https://raw.githubusercontent.com/adbose/django-feedback/assets/feedfront_download.PNG)
