@@ -1,8 +1,8 @@
 from django.shortcuts import render
-from .models import Question
+from .models import Question,User
 
 from django.views.generic import TemplateView
-from .forms import UserRegistrationForm, FeedbackForm#, QuizForm
+from .forms import UserRegistrationForm
 
 # # Create your views here.
 
@@ -46,7 +46,6 @@ class RegistrationPageView(TemplateView):
         return render(request, template_name='core/registration_submitted.html', context={'user': user})
 
 
-
 class FeedbackView(TemplateView):
     def get(self, request):
         # form = FeedbackForm()
@@ -68,7 +67,6 @@ class FeedbackView(TemplateView):
             print("##########")
 
         return render(request, template_name='core/feedback.html', context={'ques': ques})
-        # return render(request, template_name='core/feedback.html', context={'form': form, 'ques': ques})
 
     def post(self, request):
         data = request.POST
@@ -111,7 +109,8 @@ class FeedbackView(TemplateView):
         print("#####")
         print("Converting the response dictionary into JSON string...")
         print(response_json)
-        # import ipdb;ipdb.set_trace()
+
+        # todo: update Response model to save responses for each user along with timestamp
         # if form.is_valid():
         #     response = form.save()
         #     print("form is valid")
@@ -131,37 +130,10 @@ from django.conf import settings
 import os
 
 def download(request):
-    response = HttpResponse(content_type='application/force-download') # mimetype is replaced by content_type for django 1.7
-    response['Content-Disposition'] = 'attachment; filename=%s' % smart_str('feedback_submitted.json')
+    # todo: Change to class based view
+    file_path = os.path.join(settings.MEDIA_ROOT, 'download', 'feedback_response.json')
 
-    path = os.path.join(settings.MEDIA_ROOT, 'download/')
-    response['X-Sendfile'] = smart_str(path)
-    # It's usually a good idea to set the 'Content-Length' header too.
-    # You can also set any other required headers: Cache-Control, etc.
+    data = open(file_path).read()
+    response = HttpResponse(data, content_type='application/json') # mimetype is replaced by content_type for django 1.7
+    response['Content-Disposition'] = 'attachment; filename=%s' % smart_str('feedback_response.json')
     return response
-
-
-# from django.http import HttpResponse
-# from django.conf import settings
-# import os
-#
-# def download(request):
-#     file_path = os.path.join(settings.BASE_DIR, 'media\\download\\feedback_submitted.json')
-#     print(file_path)
-#     json_data = open(file_path, "r").read()
-#     return HttpResponse(json_data, content_type="application/json")
-
-
-# import os
-# from django.conf import settings
-# from django.http import HttpResponse, Http404
-#
-#
-# def download(request, path='download/feedback_submitted.json'):
-#     file_path = os.path.join(settings.MEDIA_ROOT, path)
-#     if os.path.exists(file_path):
-#         with open(file_path, 'rb') as fh:
-#             response = HttpResponse(fh.read(), content_type="application/json")
-#             response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
-#             return response
-#     raise Http404

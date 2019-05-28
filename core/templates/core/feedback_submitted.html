@@ -5,12 +5,14 @@
 {% endblock %}
 
 {% block content %}
+
   <div>
     <h1 class="center">Thank you for participating!</h1>
     <p class="center">Your feedback has been submitted. Download the feedback as a JSON file.</p>
       <p class="center">
-        <a class="btn btn-primary btn-md" href="{% url 'download' %}" download>Download</a>
+        <a class="btn btn-primary btn-md" href="{% url 'download' %}"  >Download</a>
       </p>
     </form>
   </div>
 {% endblock %}
+
