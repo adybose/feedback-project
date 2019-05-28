@@ -109,7 +109,7 @@ class FeedbackView(TemplateView):
         import json
         response_json = json.dumps(response)
         print("#####")
-        print("Converting the response dictionary into JSON string")
+        print("Converting the response dictionary into JSON string...")
         print(response_json)
         # import ipdb;ipdb.set_trace()
         # if form.is_valid():
@@ -123,21 +123,6 @@ class FeedbackView(TemplateView):
         f.write(response_json)
         f.close()
         return render(request, template_name='core/feedback_submitted.html', context={})
-
-
-
-
-
-
-# from django.http import HttpResponse
-# from django.conf import settings
-# import os
-#
-# def download(request):
-#     file_path = os.path.join(settings.BASE_DIR, 'media\\download\\feedback_submitted.json')
-#     print(file_path)
-#     json_data = open(file_path, "r").read()
-#     return HttpResponse(json_data, content_type="application/json")
 
 
 from django.utils.encoding import smart_str
@@ -154,6 +139,17 @@ def download(request):
     # It's usually a good idea to set the 'Content-Length' header too.
     # You can also set any other required headers: Cache-Control, etc.
     return response
+
+
+# from django.http import HttpResponse
+# from django.conf import settings
+# import os
+#
+# def download(request):
+#     file_path = os.path.join(settings.BASE_DIR, 'media\\download\\feedback_submitted.json')
+#     print(file_path)
+#     json_data = open(file_path, "r").read()
+#     return HttpResponse(json_data, content_type="application/json")
 
 
 # import os
