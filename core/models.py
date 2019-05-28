@@ -8,8 +8,8 @@ from django import forms
 
 NAME_REGEX = '^[a-zA-Z ]*$'
 
-
 # Create your models here.
+
 
 class User(models.Model):
     full_name = None
