@@ -40,10 +40,12 @@ class RegistrationPageView(TemplateView):
             print("#####")
             print("User dictionary saved in session without csrfmiddlewaretoken...")
             print(user_dict)
+            return render(request, template_name='core/registration_submitted.html', context={'user': user})
+
 
         else:
             print("form is invalid")
-        return render(request, template_name='core/registration_submitted.html', context={'user': user})
+            return render(request, template_name='core/register.html', context={'form': form})
 
 
 class FeedbackView(TemplateView):
